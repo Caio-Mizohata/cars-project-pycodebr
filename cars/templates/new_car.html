@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<title>{% block title %} Cadastro de carro {% endblock %}</title>
+<form method="post" enctype="multipart/form-data" autocomplete="off">
+    {% csrf_token %}
+
+    <table>
+        {{new_car_form.as_table}}
+    </table>
+
+    <input type="submit" value="Cadastrar">
+
+</form>
+
+
+{% endblock %}

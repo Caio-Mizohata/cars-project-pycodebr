@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/cars.css' %}">
+{% endblock %}
+
+<title>{% block title %} Página principal {% endblock %}</title>
+  <form method="GET" action="{% url 'cars_list' %}" autocomplete="off">
+    <input type="text" name="search" placeholder="Buscar carro..."> 
+    <button type="submit">Buscar</button>
+  </form>
+
+  <div class="car-grid">
+    {% if cars %}
+      {% for car in cars %}
+      <a href="{% url 'car_detail' car.id %}">
+        <div class="car-card">
+          {% if car.image %}
+            <img src="{{ car.image.url }}" alt="{{ car.model }} - {{ car.brand }}">
+          {% else %}
+            <p class="photo-placeholder">Foto não disponível</p>
+          {% endif %}
+          <h2 class="car-title">{{ car.brand }} {{ car.model }}</h2>
+          <p>Modelo: {{ car.factory_year }}</p>
+          <p>R$ {{ car.value | floatformat:0 | intcomma }}</p>
+        </div>
+      </a>
+      {% endfor %}
+    {% else %}
+      <p class="no-results">Nenhum carro encontrado.</p>
+    {% endif %}
+  </div>
+{% endblock %}

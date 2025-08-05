@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+
+        {% if user.is_authenticated %}
+          <li>Olá {{ user.username }}</li>
+          <li><a href="{% url 'cars_list' %}">Menu de Carros</a></li>
+          <li><a href="{% url 'new_car' %}">Cadastrar carro</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'login' %}">Fazer login</a></li>
+          <li><a href="{% url 'register' %}">Cadastrar-se</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    {% block content %}
+    {% endblock %}
+  </main>
+
+  <footer>
+    <p>&copy; 2023 PycodeBR Multimarcas</p>
+  </footer>
+</body>
+</html>
