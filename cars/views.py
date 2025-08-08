@@ -27,7 +27,7 @@ class NewCarCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['new_cars_forms'] = CarModelForm()
+        context['new_car_forms'] = CarModelForm()
         return context
 
 
